@@ -11,10 +11,15 @@ import javafx.util.Duration;
 
 public class Sprint {
 
-    Timeline timeline;
-    SequentialTransition sequentialTransition;
-    Shape shape;
-    Control control;
+    // Items
+    private Timeline timeline;
+    private SequentialTransition sequentialTransition;
+    private Interpolator interpolator = Interpolator.EASE_OUT;
+    private Shape shape;
+    private Control control;
+
+    // Constants
+    final Interpolator EASE_OUT = Interpolator.EASE_OUT;
 
     /**
      * Creates a sprint animator with a shape. This element can be changed to any other element later using setElement()
@@ -48,11 +53,11 @@ public class Sprint {
         KeyValue keyValueY;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.translateXProperty(), x, Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(shape.translateYProperty(), y, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.translateXProperty(), x, interpolator);
+            keyValueY = new KeyValue(shape.translateYProperty(), y, interpolator);
         } else {
-            keyValueX = new KeyValue(control.translateXProperty(), x, Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(control.translateYProperty(), y, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.translateXProperty(), x, interpolator);
+            keyValueY = new KeyValue(control.translateYProperty(), y, interpolator);
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
@@ -73,14 +78,14 @@ public class Sprint {
         KeyValue keyValueY;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.translateXProperty(), shape.getTranslateX(), Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(shape.translateYProperty(), shape.getTranslateY(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.translateXProperty(), shape.getTranslateX(), interpolator);
+            keyValueY = new KeyValue(shape.translateYProperty(), shape.getTranslateY(), interpolator);
 
             shape.setTranslateX(x);
             shape.setTranslateY(y);
         } else {
-            keyValueX = new KeyValue(control.translateXProperty(), control.getTranslateX(), Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(control.translateYProperty(), control.getTranslateY(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.translateXProperty(), control.getTranslateX(), interpolator);
+            keyValueY = new KeyValue(control.translateYProperty(), control.getTranslateY(), interpolator);
 
             control.setTranslateX(x);
             control.setTranslateY(y);
@@ -102,9 +107,9 @@ public class Sprint {
         KeyValue keyValueX;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.opacityProperty(), opacity, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.opacityProperty(), opacity, interpolator);
         } else {
-            keyValueX = new KeyValue(control.opacityProperty(), opacity, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.opacityProperty(), opacity, interpolator);
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
@@ -123,11 +128,11 @@ public class Sprint {
         KeyValue keyValueX;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.opacityProperty(), shape.getOpacity(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.opacityProperty(), shape.getOpacity(), interpolator);
 
             shape.setOpacity(opacity);
         } else {
-            keyValueX = new KeyValue(control.opacityProperty(), control.getOpacity(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.opacityProperty(), control.getOpacity(), interpolator);
 
             control.setOpacity(opacity);
         }
@@ -150,11 +155,11 @@ public class Sprint {
         KeyValue keyValueY;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.scaleXProperty(), x, Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(shape.scaleYProperty(), y, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.scaleXProperty(), x, interpolator);
+            keyValueY = new KeyValue(shape.scaleYProperty(), y, interpolator);
         } else {
-            keyValueX = new KeyValue(control.scaleXProperty(), x, Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(control.scaleYProperty(), y, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.scaleXProperty(), x, interpolator);
+            keyValueY = new KeyValue(control.scaleYProperty(), y, interpolator);
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
@@ -169,14 +174,14 @@ public class Sprint {
         KeyValue keyValueY;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.scaleXProperty(), shape.getScaleX(), Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(shape.scaleYProperty(), shape.getScaleY(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.scaleXProperty(), shape.getScaleX(), interpolator);
+            keyValueY = new KeyValue(shape.scaleYProperty(), shape.getScaleY(), interpolator);
 
             shape.setScaleX(x);
             shape.setScaleY(y);
         } else {
-            keyValueX = new KeyValue(control.scaleXProperty(), control.getScaleX(), Interpolator.EASE_BOTH);
-            keyValueY = new KeyValue(control.scaleYProperty(), control.getScaleY(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.scaleXProperty(), control.getScaleX(), interpolator);
+            keyValueY = new KeyValue(control.scaleYProperty(), control.getScaleY(), interpolator);
 
             control.setScaleX(x);
             control.setScaleY(y);
@@ -198,9 +203,9 @@ public class Sprint {
         KeyValue keyValueX;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.rotateProperty(), angle, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.rotateProperty(), angle, interpolator);
         } else {
-            keyValueX = new KeyValue(control.rotateProperty(), angle, Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.rotateProperty(), angle, interpolator);
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
@@ -219,17 +224,23 @@ public class Sprint {
         KeyValue keyValueX;
 
         if (shape != null) {
-            keyValueX = new KeyValue(shape.rotateProperty(), shape.getRotate(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(shape.rotateProperty(), shape.getRotate(), interpolator);
 
             shape.setRotate(angle);
         } else {
-            keyValueX = new KeyValue(control.rotateProperty(), control.getRotate(), Interpolator.EASE_BOTH);
+            keyValueX = new KeyValue(control.rotateProperty(), control.getRotate(), interpolator);
 
             control.setRotate(angle);
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
         timeline.getKeyFrames().add(keyFrame);
+
+        return this;
+    }
+
+    public Sprint setInterpolator(Interpolator interpolator) {
+        this.interpolator = interpolator;
 
         return this;
     }
@@ -246,6 +257,27 @@ public class Sprint {
     }
 
     /**
+     * Loops the animation. Use 0 for count to run the loop indefinitely.
+     * @param count The number of times to run the animation. 0 for indefinite.
+     */
+    public void loop(int count) {
+        sequentialTransition.getChildren().add(timeline);
+
+        if (count == 0) {
+            sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
+        } else {
+            sequentialTransition.setCycleCount(count);
+        }
+
+        sequentialTransition.setAutoReverse(true);
+        sequentialTransition.play();
+
+        this.timeline = null;
+        this.sequentialTransition = null;
+    }
+
+
+    /**
      * Create a pause in the animation timeline, so that elements can animate at different times.
      * Normally, all animations are occurring at the same time. Use wait() in order to move on to the next animation.
      * Use a time of 0.0 if you want there to be no gap, but rather just a transition to the next animation.=
@@ -259,15 +291,13 @@ public class Sprint {
 
         // Adds a fake animation to create a pause
         KeyValue keyValueX = new KeyValue(shape.fillProperty(), shape.getFill());
-        Duration duration = Duration.millis(time);
+        Duration duration = Duration.seconds(time);
 
         KeyFrame keyFrame = new KeyFrame(duration, keyValueX);
         timeline.getKeyFrames().add(keyFrame);
 
         sequentialTransition.getChildren().add(timeline);
         timeline = new Timeline();
-
-        System.out.println(timeline);
 
         return this;
     }

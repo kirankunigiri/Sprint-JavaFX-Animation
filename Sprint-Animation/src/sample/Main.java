@@ -23,10 +23,10 @@ public class Main extends Application {
 
         // Test Animations
         Sprint sprint = new Sprint(circle);
-        sprint.move(2.0, 200, 200).wait(1.0);
+        sprint.moveTo(2.0, 200, 200).wait(0.0);
 
         sprint.setElement(button);
-        sprint.move(5.0, 300, 0).sprint();
+        sprint.moveFrom(2.0, 300, 0).sprint();
 
 
         primaryStage.setScene(new Scene(root, 800, 600));
