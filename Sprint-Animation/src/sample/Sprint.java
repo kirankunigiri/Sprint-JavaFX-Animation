@@ -237,6 +237,52 @@ public class Sprint {
         return this;
     }
 
+    /**
+     * Animates the element's border color to the new one given. CAN ONLY BE APPLIED TO SHAPES.
+     * @param duration Duration of the animation
+     * @param color The color to animate to.
+     */
+    public Sprint strokeTo(double duration, Color color) {
+
+        KeyValue keyValueX;
+
+        if (node instanceof Shape) {
+            Shape shape = (Shape) node;
+            keyValueX = new KeyValue(shape.strokeProperty(), color, interpolator);
+        } else {
+            return this;
+        }
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
+        timeline.getKeyFrames().add(keyFrame);
+
+        return this;
+    }
+
+    /**
+     * Animates the element's border color from the given rotation to the existing one. CAN ONLY BE APPLIED TO SHAPES.
+     * @param duration Duration of the animation
+     * @param color The color to animate from
+     */
+    public Sprint strokeFrom(double duration, Color color) {
+
+        KeyValue keyValueX;
+
+        if (node instanceof Shape) {
+            Shape shape = (Shape) node;
+            keyValueX = new KeyValue(shape.strokeProperty(), shape.getStroke(), interpolator);
+
+            shape.setStroke(color);
+        } else {
+            return this;
+        }
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
+        timeline.getKeyFrames().add(keyFrame);
+
+        return this;
+    }
+
 
 
     public Sprint setInterpolator(Interpolator interpolator) {
