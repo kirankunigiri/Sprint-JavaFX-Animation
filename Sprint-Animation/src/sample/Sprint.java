@@ -1,7 +1,8 @@
 package sample;
 
 import javafx.animation.*;
-import javafx.scene.control.Control;
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
@@ -11,34 +12,23 @@ import javafx.util.Duration;
 
 public class Sprint {
 
-    // Items
+    // Properties
     private Timeline timeline;
     private SequentialTransition sequentialTransition;
     private Interpolator interpolator = Interpolator.EASE_OUT;
-    private Shape shape;
-    private Control control;
+    private Node node;
 
     // Constants
     final Interpolator EASE_OUT = Interpolator.EASE_OUT;
 
     /**
-     * Creates a sprint animator with a shape. This element can be changed to any other element later using setElement()
-     * @param shape The element to animate
+     * Creates a sprint animator with a node. This node can be changed to any other node later using setNode()
+     * @param node The element to animate
      */
-    public Sprint(Shape shape) {
+    public Sprint(Node node) {
         this.timeline = new Timeline();
         this.sequentialTransition = new SequentialTransition();
-        this.shape = shape;
-    }
-
-    /**
-     * Creates a sprint animator with a UI Element (control object). This element can be changed to any other element later using setElement()
-     * @param control The element to animate
-     */
-    public Sprint(Control control) {
-        this.timeline = new Timeline();
-        this.sequentialTransition = new SequentialTransition();
-        this.control = control;
+        this.node = node;
     }
 
     /**
@@ -52,13 +42,8 @@ public class Sprint {
         KeyValue keyValueX;
         KeyValue keyValueY;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.translateXProperty(), x, interpolator);
-            keyValueY = new KeyValue(shape.translateYProperty(), y, interpolator);
-        } else {
-            keyValueX = new KeyValue(control.translateXProperty(), x, interpolator);
-            keyValueY = new KeyValue(control.translateYProperty(), y, interpolator);
-        }
+        keyValueX = new KeyValue(node.translateXProperty(), x, interpolator);
+        keyValueY = new KeyValue(node.translateYProperty(), y, interpolator);
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
@@ -72,24 +57,16 @@ public class Sprint {
      * @param x The new x coordinate to animate to
      * @param y The new y coordinate to animate to
      */
-    public Sprint moveFrom(double duration, int x, int y) {
+    public Sprint moveFrom(double duration, double x, double y) {
 
         KeyValue keyValueX;
         KeyValue keyValueY;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.translateXProperty(), shape.getTranslateX(), interpolator);
-            keyValueY = new KeyValue(shape.translateYProperty(), shape.getTranslateY(), interpolator);
+        keyValueX = new KeyValue(node.translateXProperty(), node.getTranslateX(), interpolator);
+        keyValueY = new KeyValue(node.translateYProperty(), node.getTranslateY(), interpolator);
 
-            shape.setTranslateX(x);
-            shape.setTranslateY(y);
-        } else {
-            keyValueX = new KeyValue(control.translateXProperty(), control.getTranslateX(), interpolator);
-            keyValueY = new KeyValue(control.translateYProperty(), control.getTranslateY(), interpolator);
-
-            control.setTranslateX(x);
-            control.setTranslateY(y);
-        }
+        node.setTranslateX(x);
+        node.setTranslateY(y);
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
@@ -106,11 +83,7 @@ public class Sprint {
 
         KeyValue keyValueX;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.opacityProperty(), opacity, interpolator);
-        } else {
-            keyValueX = new KeyValue(control.opacityProperty(), opacity, interpolator);
-        }
+        keyValueX = new KeyValue(node.opacityProperty(), opacity, interpolator);
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
         timeline.getKeyFrames().add(keyFrame);
@@ -119,24 +92,18 @@ public class Sprint {
     }
 
     /**
-     * Animates the element to the new opacity given
+     * Animates the element from the given opacity to the existing opacity
      * @param duration Duration of the animation
      * @param opacity The new opacity to animate to
      */
     public Sprint fadeFrom(double duration, double opacity) {
 
         KeyValue keyValueX;
+    
+        keyValueX = new KeyValue(node.opacityProperty(), node.getOpacity(), interpolator);
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.opacityProperty(), shape.getOpacity(), interpolator);
-
-            shape.setOpacity(opacity);
-        } else {
-            keyValueX = new KeyValue(control.opacityProperty(), control.getOpacity(), interpolator);
-
-            control.setOpacity(opacity);
-        }
-
+        node.setOpacity(opacity);
+        
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
         timeline.getKeyFrames().add(keyFrame);
 
@@ -154,13 +121,8 @@ public class Sprint {
         KeyValue keyValueX;
         KeyValue keyValueY;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.scaleXProperty(), x, interpolator);
-            keyValueY = new KeyValue(shape.scaleYProperty(), y, interpolator);
-        } else {
-            keyValueX = new KeyValue(control.scaleXProperty(), x, interpolator);
-            keyValueY = new KeyValue(control.scaleYProperty(), y, interpolator);
-        }
+        keyValueX = new KeyValue(node.scaleXProperty(), x, interpolator);
+        keyValueY = new KeyValue(node.scaleYProperty(), y, interpolator);
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
@@ -168,24 +130,23 @@ public class Sprint {
         return this;
     }
 
+    /**
+     * Animates the element's scale from the given scale to the existing one
+     * @param duration
+     * @param x
+     * @param y
+     * @return
+     */
     public Sprint scaleFrom(double duration, double x, double y) {
 
         KeyValue keyValueX;
         KeyValue keyValueY;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.scaleXProperty(), shape.getScaleX(), interpolator);
-            keyValueY = new KeyValue(shape.scaleYProperty(), shape.getScaleY(), interpolator);
+        keyValueX = new KeyValue(node.scaleXProperty(), node.getScaleX(), interpolator);
+        keyValueY = new KeyValue(node.scaleYProperty(), node.getScaleY(), interpolator);
 
-            shape.setScaleX(x);
-            shape.setScaleY(y);
-        } else {
-            keyValueX = new KeyValue(control.scaleXProperty(), control.getScaleX(), interpolator);
-            keyValueY = new KeyValue(control.scaleYProperty(), control.getScaleY(), interpolator);
-
-            control.setScaleX(x);
-            control.setScaleY(y);
-        }
+        node.setScaleX(x);
+        node.setScaleY(y);
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
@@ -202,10 +163,48 @@ public class Sprint {
 
         KeyValue keyValueX;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.rotateProperty(), angle, interpolator);
+        keyValueX = new KeyValue(node.rotateProperty(), angle, interpolator);
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
+        timeline.getKeyFrames().add(keyFrame);
+
+        return this;
+    }
+
+    /**
+     * Animates the element's rotation from the given rotation to the existing one
+     * @param duration Duration of the animation
+     * @param angle The angle to rotate the element by. It's axis is the center of the element.
+     */
+    public Sprint rotateFrom(double duration, double angle) {
+
+        KeyValue keyValueX;
+
+        keyValueX = new KeyValue(node.rotateProperty(), node.getRotate(), interpolator);
+
+        node.setRotate(angle);
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
+        timeline.getKeyFrames().add(keyFrame);
+
+        return this;
+    }
+
+
+    /**
+     * Animates the element's color to the new one given. CAN ONLY BE APPLIED TO SHAPES.
+     * @param duration Duration of the animation
+     * @param color The color to animate to.
+     */
+    public Sprint fillTo(double duration, Color color) {
+
+        KeyValue keyValueX;
+
+        if (node instanceof Shape) {
+            Shape shape = (Shape) node;
+            keyValueX = new KeyValue(shape.fillProperty(), color, interpolator);
         } else {
-            keyValueX = new KeyValue(control.rotateProperty(), angle, interpolator);
+            return this;
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
@@ -215,22 +214,21 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's rotation to the new one given
+     * Animates the element's color from the given rotation to the existing one. CAN ONLY BE APPLIED TO SHAPES.
      * @param duration Duration of the animation
-     * @param angle The angle to rotate the element by. It's axis is the center of the element.
+     * @param color The color to animate from
      */
-    public Sprint rotateFrom(double duration, double angle) {
+    public Sprint fillFrom(double duration, Color color) {
 
         KeyValue keyValueX;
 
-        if (shape != null) {
-            keyValueX = new KeyValue(shape.rotateProperty(), shape.getRotate(), interpolator);
+        if (node instanceof Shape) {
+            Shape shape = (Shape) node;
+            keyValueX = new KeyValue(shape.fillProperty(), shape.getFill(), interpolator);
 
-            shape.setRotate(angle);
+            shape.setFill(color);
         } else {
-            keyValueX = new KeyValue(control.rotateProperty(), control.getRotate(), interpolator);
-
-            control.setRotate(angle);
+            return this;
         }
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX);
@@ -238,6 +236,8 @@ public class Sprint {
 
         return this;
     }
+
+
 
     public Sprint setInterpolator(Interpolator interpolator) {
         this.interpolator = interpolator;
@@ -258,6 +258,7 @@ public class Sprint {
 
     /**
      * Loops the animation. Use 0 for count to run the loop indefinitely.
+     * Suggested to change the interpolator to EASE_BOTH for a smooth loop.
      * @param count The number of times to run the animation. 0 for indefinite.
      */
     public void loop(int count) {
@@ -266,7 +267,8 @@ public class Sprint {
         if (count == 0) {
             sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
         } else {
-            sequentialTransition.setCycleCount(count);
+            // Double the cycle count because 1 animation counts as 1 cycle; we want a whole animation loop to count as 1 cycle
+            sequentialTransition.setCycleCount(count * 2);
         }
 
         sequentialTransition.setAutoReverse(true);
@@ -282,7 +284,6 @@ public class Sprint {
      * Normally, all animations are occurring at the same time. Use wait() in order to move on to the next animation.
      * Use a time of 0.0 if you want there to be no gap, but rather just a transition to the next animation.=
      * @param time
-     * @return
      */
     public Sprint wait(double time) {
 
@@ -290,7 +291,7 @@ public class Sprint {
         timeline = new Timeline();
 
         // Adds a fake animation to create a pause
-        KeyValue keyValueX = new KeyValue(shape.fillProperty(), shape.getFill());
+        KeyValue keyValueX = new KeyValue(node.rotateProperty(), node.getRotate());
         Duration duration = Duration.seconds(time);
 
         KeyFrame keyFrame = new KeyFrame(duration, keyValueX);
@@ -304,24 +305,35 @@ public class Sprint {
 
     /**
      * Change the element being animated.
-     * @param element The new element to animate
+     * @param node The new element to animate
      */
-    public Sprint setElement(Shape element) {
+    public Sprint setNode(Node node) {
 
-        this.control = null;
-        this.shape = element;
+        this.node = node;
 
         return this;
     }
 
-    /**
-     * Change the element being animated
-     * @param element The new element to animate
-     */
-    public Sprint setElement(Control element) {
+    // Helper animation functions
 
-        this.shape = null;
-        this.control = element;
+    /**
+     * Slides an element in from the right side of the screen to its existing position.
+     * @param duration The duration of the animation
+     */
+    public Sprint slideInRight(double duration) {
+
+        this.moveFrom(duration, node.getScene().getWidth() + node.getLayoutBounds().getWidth(), node.getTranslateY());
+        
+        return this;
+    }
+
+    /**
+     * Slides an element in from the left side of the screen to its existing position.
+     * @param duration The duration of the animation
+     */
+    public Sprint slideInLeft(double duration) {
+     
+        this.moveFrom(duration, -node.getScene().getWidth(), node.getTranslateY());
 
         return this;
     }

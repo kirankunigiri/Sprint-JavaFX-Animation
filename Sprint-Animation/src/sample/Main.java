@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.Interpolator;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,16 +22,18 @@ public class Main extends Application {
 
         root.getChildren().addAll(circle, button);
 
-        // Test Animations
-        Sprint sprint = new Sprint(circle);
-        sprint.moveTo(2.0, 200, 200).wait(0.0);
-
-        sprint.setElement(button);
-        sprint.moveFrom(2.0, 300, 0).sprint();
-
-
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
+
+        // Test Animations
+        Sprint sprint = new Sprint(button);
+        sprint.setInterpolator(Interpolator.EASE_BOTH);
+        sprint.moveNodeTo(3.0, 200, 200).sprint();
+
+//        sprint.moveTo(2.0, 200, 200).wait(0.0);
+//
+//        sprint.setElement(button);
+//        sprint.moveFrom(2.0, 300, 0).sprint();
     }
 
 
