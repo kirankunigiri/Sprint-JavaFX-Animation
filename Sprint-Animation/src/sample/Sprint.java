@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.animation.*;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -18,8 +19,10 @@ public class Sprint {
     private Interpolator interpolator = Interpolator.EASE_OUT;
     private Node node;
 
-    // Constants
-    final Interpolator EASE_OUT = Interpolator.EASE_OUT;
+    // Interpolator constants
+    private Interpolator EASE_BOTH = Interpolator.SPLINE(0.8000, 0.2000, 0.2000, 0.8000);
+    private Interpolator QUICK = Interpolator.SPLINE(0.0645, 0.4363, 0.0921, 0.9461);
+
 
     /**
      * Creates a sprint animator with a node. This node can be changed to any other node later using setNode()
@@ -59,6 +62,12 @@ public class Sprint {
      */
     public Sprint moveFrom(double duration, double x, double y) {
 
+        Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+
+
+        System.out.println("Bounds in scene: " + boundsInScene);
+
+
         KeyValue keyValueX;
         KeyValue keyValueY;
 
@@ -70,6 +79,9 @@ public class Sprint {
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
+
+        System.out.println("Bounds in scene: " + boundsInScene);
+
 
         return this;
     }
@@ -298,8 +310,13 @@ public class Sprint {
         sequentialTransition.getChildren().add(timeline);
         sequentialTransition.play();
 
-        this.timeline = null;
-        this.sequentialTransition = null;
+//        sequentialTransition.setOnFinished(e -> {
+//            sequentialTransition = null;
+//            timeline = null;
+//        });
+
+        this.timeline = new Timeline();
+        this.sequentialTransition = new SequentialTransition();
     }
 
     /**
@@ -366,10 +383,11 @@ public class Sprint {
      * Slides an element in from the right side of the screen to its existing position.
      * @param duration The duration of the animation
      */
-    public Sprint slideInRight(double duration) {
+    public Sprint slideFromRight(double duration) {
 
-        this.moveFrom(duration, node.getScene().getWidth() + node.getLayoutBounds().getWidth(), node.getTranslateY());
-        
+        Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+        double dx = node.getScene().getWidth() - boundsInScene.getMaxX() + boundsInScene.getWidth();
+        this.moveFrom(duration, dx, node.getTranslateY());
         return this;
     }
 
@@ -377,11 +395,70 @@ public class Sprint {
      * Slides an element in from the left side of the screen to its existing position.
      * @param duration The duration of the animation
      */
-    public Sprint slideInLeft(double duration) {
-     
-        this.moveFrom(duration, -node.getScene().getWidth(), node.getTranslateY());
+    public Sprint slideFromLeft(double duration) {
+
+        Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+        double dx = -boundsInScene.getMinX() - boundsInScene.getWidth();
+        this.moveFrom(duration, dx, node.getTranslateY());
+
+        return this;
+    }
+
+    /**
+     * Slides an element in from the top of the screen to its existing position.
+     * @param duration The duration of the animation
+     */
+    public Sprint slideFromTop(double duration) {
+
+        Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+        double dy = -boundsInScene.getMinY() - boundsInScene.getHeight();
+        this.moveFrom(duration, node.getTranslateX(), dy);
+
+        return this;
+    }
+
+    /**
+     * Slides an element in from the bottom of the screen to its existing position.
+     * @param duration The duration of the animation
+     */
+    public Sprint slideFromBottom(double duration) {
+
+        Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+        double dy = node.getScene().getHeight() - boundsInScene.getMaxY() + boundsInScene.getHeight();
+        this.moveFrom(duration, node.getTranslateX(), dy);
 
         return this;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
