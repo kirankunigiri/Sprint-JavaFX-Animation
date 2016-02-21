@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.animation.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -18,11 +20,7 @@ public class Sprint {
     private SequentialTransition sequentialTransition;
     private Interpolator interpolator = Interpolator.EASE_OUT;
     private Node node;
-
-    // Interpolator constants
-    private Interpolator EASE_BOTH = Interpolator.SPLINE(0.8000, 0.2000, 0.2000, 0.8000);
-    private Interpolator QUICK = Interpolator.SPLINE(0.0645, 0.4363, 0.0921, 0.9461);
-
+    public BooleanProperty isAnimating;
 
     /**
      * Creates a sprint animator with a node. This node can be changed to any other node later using setNode()
@@ -32,6 +30,7 @@ public class Sprint {
         this.timeline = new Timeline();
         this.sequentialTransition = new SequentialTransition();
         this.node = node;
+        isAnimating = new SimpleBooleanProperty(this, "isAnimating", false);
     }
 
     /**
@@ -64,10 +63,6 @@ public class Sprint {
 
         Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
 
-
-        System.out.println("Bounds in scene: " + boundsInScene);
-
-
         KeyValue keyValueX;
         KeyValue keyValueY;
 
@@ -79,9 +74,6 @@ public class Sprint {
 
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(duration), keyValueX, keyValueY);
         timeline.getKeyFrames().add(keyFrame);
-
-        System.out.println("Bounds in scene: " + boundsInScene);
-
 
         return this;
     }
@@ -296,11 +288,22 @@ public class Sprint {
     }
 
 
-
+    /**
+     * Change the interpolator to a custom one
+     * @param interpolator The new interpolator to use
+     */
     public Sprint setInterpolator(Interpolator interpolator) {
         this.interpolator = interpolator;
 
         return this;
+    }
+
+    /**
+     * Get the current interpolator being used
+     * @return interpolator
+     */
+    public Interpolator getInterpolator() {
+        return this.interpolator;
     }
 
     /**
@@ -310,10 +313,10 @@ public class Sprint {
         sequentialTransition.getChildren().add(timeline);
         sequentialTransition.play();
 
-//        sequentialTransition.setOnFinished(e -> {
-//            sequentialTransition = null;
-//            timeline = null;
-//        });
+        isAnimating.set(true);
+        sequentialTransition.setOnFinished(event -> {
+            isAnimating.set(false);
+        });
 
         this.timeline = new Timeline();
         this.sequentialTransition = new SequentialTransition();
@@ -330,15 +333,19 @@ public class Sprint {
         if (count == 0) {
             sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
         } else {
-            // Double the cycle count because 1 animation counts as 1 cycle; we want a whole animation loop to count as 1 cycle
-            sequentialTransition.setCycleCount(count * 2);
+            sequentialTransition.setCycleCount(count);
         }
 
         sequentialTransition.setAutoReverse(true);
         sequentialTransition.play();
 
-        this.timeline = null;
-        this.sequentialTransition = null;
+        isAnimating.set(true);
+        sequentialTransition.setOnFinished(event -> {
+            isAnimating.set(false);
+        });
+
+        this.timeline = new Timeline();
+        this.sequentialTransition = new SequentialTransition();
     }
 
 
@@ -375,6 +382,22 @@ public class Sprint {
         this.node = node;
 
         return this;
+    }
+
+    /**
+     * Get the node being animated
+     * @return node
+     */
+    public Node getNode() {
+        return this.node;
+    }
+
+    /**
+     * Determine whether Sprint is currently animating or not
+     * @return Animation state
+     */
+    public boolean isAnimating() {
+        return this.isAnimating.get();
     }
 
     // Helper animation functions

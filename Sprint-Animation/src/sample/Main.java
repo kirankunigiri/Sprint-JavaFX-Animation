@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -17,7 +18,10 @@ public class Main extends Application {
 
         // Test elements
 //        Circle circle = new Circle(100, 100, 50);
-//        Button button = new Button("Animate!");
+        Button button = new Button("Animate!");
+        button.setOnAction(e -> {
+
+        });
 //
 //        root.getChildren().addAll(circle, button);
 
@@ -29,6 +33,7 @@ public class Main extends Application {
         // Test Animations
 //        Sprint sprint = new Sprint(button);
 //        sprint.setInterpolator(Interpolator.EASE_BOTH);
+
 
 //        sprint.moveTo(2.0, 200, 200).wait(0.0);
 //
