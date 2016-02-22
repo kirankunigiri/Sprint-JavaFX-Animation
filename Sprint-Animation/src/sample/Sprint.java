@@ -22,6 +22,10 @@ public class Sprint {
     private Node node;
     public BooleanProperty isAnimating;
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * Creates a sprint animator with a node. This node can be changed to any other node later using setNode()
      * @param node The element to animate

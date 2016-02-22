@@ -53,8 +53,10 @@ public class Controller {
     public void buttonClicked() {
         if (!buttonIsAnimating) {
             if (!titleIsAnimating) {
-                buttonSprint.rotateTo(1, button.getRotate() + 360).sprint();
-                sprint.setInterpolator(getInterpolator());
+                Interpolator newInterpolator = getInterpolator();
+                buttonSprint.setInterpolator(newInterpolator);
+                buttonSprint.rotateTo(1.5, button.getRotate() + 360).sprint();
+                sprint.setInterpolator(newInterpolator);
                 sprint.setNode(title).slideFromLeft(1.5).sprint();
                 sprint.setNode(subtitle).slideFromRight(1.5).sprint();
             }
