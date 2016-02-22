@@ -8,7 +8,7 @@ An animation framework for JavaFX animations that makes things incredibly easy.
 ## Installation
 Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes.
 
-## Spring Guide
+## Sprint Guide
 
 With Sprint, you can chain animations together extremely easily.
 
