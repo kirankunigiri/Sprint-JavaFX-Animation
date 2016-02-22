@@ -2,7 +2,10 @@
 <img src="https://github.com/kirankunigiri/Sprint-JavaFX-Animation/blob/master/Images/Logo.png" alt="Logo" height="150">
 </p>
 
-# Sprint
+# Sprint ![License MIT](https://img.shields.io/badge/platform-JavaFX-orange.svg)
+![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![License MIT](https://img.shields.io/badge/build-passing-brightgreen.svg)
+
 An animation framework for JavaFX animations that makes things incredibly easy.
 
 ## Installation
@@ -74,7 +77,7 @@ sprint.isAnimating.addListener( (v, oldValue, newValue) -> {
 ```
 
 ## Contribute
-Anyone can contribute to this project by adding more helper animation functions, adding more properties that you can animate with Swift, fixing any bugs, and more!
+Anyone can contribute to this project by adding more helper animation functions, adding more properties that you can animate with Sprint, fixing any bugs, and more!
 
 ## License
 MIT
