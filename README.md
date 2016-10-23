@@ -9,7 +9,7 @@
 An animation framework for JavaFX that makes animations incredibly easy.
 
 ## Installation and Demo
-Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes. You can also run the .jar to look at a demo of some quick animations made with Sprint.
+Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes. You can also run the .jar to look at a demo of some quick animations made with Sprint. Download the source if you want to take a look at how the demo was made and learn by example.
 
 ## Sprint Guide
 
