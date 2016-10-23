@@ -8,8 +8,8 @@
 
 An animation framework for JavaFX animations that makes things incredibly easy.
 
-## Installation
-Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes.
+## Installation and Demo
+Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes. You can also run the .jar to look at a demo of some quick animations made with Sprint.
 
 ## Sprint Guide
 
@@ -57,7 +57,7 @@ sprint.setNode(subtitle).slideFromRight(1).sprint();
 
 Interpolators tell sprint how the speed of an animation should happen, such as slow at first and then fast, if it should bounce, be elastic, go over the value requested, and more. JavaFX doesnt' really have that many to choose from besides ease in, ease out, and ease both. 
 
-That's why Sprint also has a class called ```SprintInterpolators```, with many more fancy ones! With this, you can make an animation bounce, be elastic like a rubber band, and more! To change the interpolator Sprint is using, just use ```setIterpolator(_interpolator_)``` by using either the JavaFX default interpolators, or the new SprintInterpolators.
+That's why Sprint also has a class called ```SprintInterpolators```, with many more fancy ones! With this, you can make an animation bounce, be elastic like a rubber band, and more! To change the interpolator Sprint is using, just use ```setInterpolator(_interpolator_)``` by using either the JavaFX default interpolators, or the new SprintInterpolators.
 Credit to these interpolators go to Christian Schudt, who created them under the MIT License.
 
 Here's an example. This will give the animation an elastic swing.
