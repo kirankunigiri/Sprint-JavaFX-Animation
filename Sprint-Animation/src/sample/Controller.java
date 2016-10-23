@@ -5,6 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * @author Kiran Kunigiri
+ *
+ * An example controller class to show how you can animate a scene
+ * using Sprint. In this scene, elements first animate onto the screen
+ * by sliding in. Clicking the animate button will cause them
+ * to re-animate in using different interpolators.
+ */
+
 public class Controller {
 
     Sprint sprint;
@@ -22,6 +31,7 @@ public class Controller {
     Label subtitle;
 
     public void initialize() {
+        System.out.println("Initialized");
         instance = this;
     }
 
@@ -57,12 +67,17 @@ public class Controller {
                 buttonSprint.setInterpolator(newInterpolator);
                 buttonSprint.rotateTo(1.5, button.getRotate() + 360).sprint();
                 sprint.setInterpolator(newInterpolator);
-                sprint.setNode(title).slideFromLeft(1.5).sprint();
+                sprint.setNode(title).slideFromLeft(1.5);
                 sprint.setNode(subtitle).slideFromRight(1.5).sprint();
             }
         }
     }
 
+    /**
+     * Gets the next interpolator from the 9 SprintInterpolators. Each time it is run,
+     * the function will return the next interpolator from the list
+     * @return The next SprintInterpolator
+     */
     public Interpolator getInterpolator() {
         if (interpolatorIndex > 9) {
             interpolatorIndex = 1;

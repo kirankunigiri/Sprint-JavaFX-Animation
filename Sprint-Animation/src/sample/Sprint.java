@@ -11,6 +11,9 @@ import javafx.util.Duration;
 
 /**
  * @author Kiran Kunigiri
+ * @version 1.0
+ * Sprint is an animation framework for JavaFX that makes
+ * animation incredibly easy.
  */
 
 public class Sprint {

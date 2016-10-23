@@ -8,37 +8,25 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * @author Kiran Kunigiri
+ *
+ * The main class for the Sprint example.
+ */
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        Group root = new Group();
         primaryStage.setTitle("Hello World");
 
-        // Test elements
-//        Circle circle = new Circle(100, 100, 50);
         Button button = new Button("Animate!");
-        button.setOnAction(e -> {
-
-        });
-//
-//        root.getChildren().addAll(circle, button);
 
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
         Controller.instance.setup();
-
-        // Test Animations
-//        Sprint sprint = new Sprint(button);
-//        sprint.setInterpolator(Interpolator.EASE_BOTH);
-
-
-//        sprint.moveTo(2.0, 200, 200).wait(0.0);
-//
-//        sprint.setElement(button);
-//        sprint.moveFrom(2.0, 300, 0).sprint();
     }
 
 

@@ -7,14 +7,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * @author Kiran Kunigiri
- * @created 2/20/16
- * Period: 3
- * Time Taken: INSERT_TIME
- * Reflection: INSERT_REFLECTION
- */
-
-/**
  * List of interpolators:
  * BackInterpolator
  * BounceInterpolator
