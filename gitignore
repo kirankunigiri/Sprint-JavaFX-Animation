@@ -1,3 +1,5 @@
-Sprint-Animation/.idea
-Sprint-Animation/out
-Sprint-Animation/Sprint-Animation.iml
+Sprint-Animation/.idea/
+Sprint-Animation/out/
+
+*.class
+*.iml
