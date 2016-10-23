@@ -6,7 +6,7 @@
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![License MIT](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-An animation framework for JavaFX animations that makes things incredibly easy.
+An animation framework for JavaFX that makes animations incredibly easy.
 
 ## Installation and Demo
 Just add the .jar from the release section of this page to your project to gain access to the Sprint and SprintInterpolator classes. You can also run the .jar to look at a demo of some quick animations made with Sprint.
