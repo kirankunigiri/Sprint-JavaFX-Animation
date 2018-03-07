@@ -1,4 +1,4 @@
-package sample;
+package com.kirankunigiri.Sprint;
 
 import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;

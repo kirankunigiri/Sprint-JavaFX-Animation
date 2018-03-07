@@ -1,4 +1,4 @@
-package sample;
+package com.kirankunigiri.Sprint;
 
 import javafx.animation.Interpolator;
 import javafx.beans.property.DoubleProperty;
@@ -23,15 +23,15 @@ import javafx.beans.property.SimpleObjectProperty;
 public class SprintInterpolators {
 
     // Interpolator Constants
-    final static Interpolator BACK = new BackInterpolator();
-    final static Interpolator BOUNCE = new BounceInterpolator();
-    final static Interpolator CIRCULAR = new CircularInterpolator();
-    final static Interpolator CUBIC = new CubicInterpolator();
-    final static Interpolator ELASTIC = new ElasticInterpolator();
-    final static Interpolator EXPONENTIAL = new ExponentialInterpolator();
-    final static Interpolator QUADRATIC = new QuadraticInterpolator();
-    final static Interpolator QUINTIC = new QuinticInterpolator();
-    final static Interpolator SINE = new SineInterpolator();
+    public final static Interpolator BACK = new BackInterpolator();
+    public final static Interpolator BOUNCE = new BounceInterpolator();
+    public final static Interpolator CIRCULAR = new CircularInterpolator();
+    public final static Interpolator CUBIC = new CubicInterpolator();
+    public final static Interpolator ELASTIC = new ElasticInterpolator();
+    public final static Interpolator EXPONENTIAL = new ExponentialInterpolator();
+    public final static Interpolator QUADRATIC = new QuadraticInterpolator();
+    public final static Interpolator QUINTIC = new QuinticInterpolator();
+    public final static Interpolator SINE = new SineInterpolator();
 
 }
 
