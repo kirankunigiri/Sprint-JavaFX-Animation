@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/kirankunigiri/Sprint-JavaFX-Animation/blob/master/Images/Logo.png" alt="Logo" height="150">
+<img src="Images/Logo.png" alt="Logo" height="150">
 </p>
 
 # Sprint ![License MIT](https://img.shields.io/badge/platform-JavaFX-orange.svg)
@@ -55,15 +55,18 @@ sprint.setNode(subtitle).slideFromRight(1).sprint();
 
 ### Interpolators (Ease Curves)
 
-Interpolators tell sprint how the speed of an animation should happen, such as slow at first and then fast, if it should bounce, be elastic, go over the value requested, and more. JavaFX doesnt' really have that many to choose from besides ease in, ease out, and ease both. 
+Interpolators tell sprint how the speed of an animation should happen, such as slow at first and then fast, if it should bounce, be elastic, go over the value requested, and more. JavaFX doesn't really have that many to choose from.
 
-That's why Sprint also has a class called ```SprintInterpolators```, with many more fancy ones! With this, you can make an animation bounce, be elastic like a rubber band, and more! To change the interpolator Sprint is using, just use ```setInterpolator(_interpolator_)``` by using either the JavaFX default interpolators, or the new SprintInterpolators.
+That's why Sprint is also packed with many Interpolator classes, with many more fancy animation curves! With this, you can make an animation bounce, be elastic like a rubber band, and more. To change the interpolator Sprint is using, just use ```setInterpolator(_interpolator_)``` and pass in either a normal JavaFX interpolator, or one of the ones included in Sprint .
 Credit to these interpolators go to Christian Schudt, who created them under the MIT License.
 
 Here's an example. This will give the animation an elastic swing.
 
 ```
-sprint.setInterpolator(SprintInterpolators.ELASTIC);
+// Uses the default easing mode of EASE_IN
+sprint.setInterpolator(new ElasticInterpolator());
+// Specify an easing mode
+sprint.setInterpolator(new ElasticInterpolator(EasingMode.EASE_OUT));
 ```
 
 ### Detecting Animation State
