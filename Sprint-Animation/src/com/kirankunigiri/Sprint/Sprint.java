@@ -16,6 +16,7 @@ import javafx.util.Duration;
  * animation incredibly easy.
  */
 
+/** The main animator class */
 public class Sprint {
 
     // Properties
@@ -23,11 +24,8 @@ public class Sprint {
     private SequentialTransition sequentialTransition;
     private Interpolator interpolator = Interpolator.EASE_OUT;
     private Node node;
+    /** The animation state of sprint */
     public BooleanProperty isAnimating;
-
-    public static void main(String[] args) {
-
-    }
 
     /**
      * Creates a sprint animator with a node. This node can be changed to any other node later using setNode()
@@ -41,7 +39,7 @@ public class Sprint {
     }
 
     /**
-     * Animates the element to a the new position given the coordinates.
+     * Animates the element to the new position at the specified coordinates.
      * @param duration Duration of the animation
      * @param x The new x coordinate to animate to
      * @param y The new y coordinate to animate to
@@ -61,10 +59,10 @@ public class Sprint {
     }
 
     /**
-     * Animates the element to a the new position given the coordinates.
+     * Animates the element from the specified coordinates back to it's original position
      * @param duration Duration of the animation
-     * @param x The new x coordinate to animate to
-     * @param y The new y coordinate to animate to
+     * @param x The new x coordinate to animate from
+     * @param y The new y coordinate to animate from
      */
     public Sprint moveFrom(double duration, double x, double y) {
 
@@ -86,7 +84,7 @@ public class Sprint {
     }
 
     /**
-     * Animates the element to the new opacity given
+     * Animates the element to the new opacity specified
      * @param duration Duration of the animation
      * @param opacity The new opacity to animate to
      */
@@ -103,9 +101,9 @@ public class Sprint {
     }
 
     /**
-     * Animates the element from the given opacity to the existing opacity
+     * Animates the element from the specified opacity back to the original value
      * @param duration Duration of the animation
-     * @param opacity The new opacity to animate to
+     * @param opacity The opacity to animate from
      */
     public Sprint fadeFrom(double duration, double opacity) {
 
@@ -122,10 +120,10 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's scale to the new one given
+     * Animates the element's scale to the new value specified
      * @param duration Duration of the animation
-     * @param x The scale width to animate (A ratio based on the current width)
-     * @param y The scale height to animate (A ratio based on the current height)
+     * @param x The scale width to animate to (The multiplier value to the original width)
+     * @param y The scale height to animate to (The multiplier value to the original height)
      */
     public Sprint scaleTo(double duration, double x, double y) {
 
@@ -142,11 +140,10 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's scale from the given scale to the existing one
-     * @param duration
-     * @param x
-     * @param y
-     * @return
+     * Animates the element's scale from the one specified back to the original
+     * @param duration Duration of the animation
+     * @param x The scale width to animate from (The multiplier value to the original width)
+     * @param y The scale height to animate from (The multiplier value to the original height)
      */
     public Sprint scaleFrom(double duration, double x, double y) {
 
@@ -166,9 +163,9 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's rotation to the new one given
+     * Animates the element's rotation to the new value specified
      * @param duration Duration of the animation
-     * @param angle The angle to rotate the element by. It's axis is the center of the element.
+     * @param angle The angle to rotate the element by around it's center
      */
     public Sprint rotateTo(double duration, double angle) {
 
@@ -183,9 +180,9 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's rotation from the given rotation to the existing one
+     * Animates the element from the specified rotation back to the original value
      * @param duration Duration of the animation
-     * @param angle The angle to rotate the element by. It's axis is the center of the element.
+     * @param angle The angle to rotate the element by around it's center
      */
     public Sprint rotateFrom(double duration, double angle) {
 
@@ -201,13 +198,12 @@ public class Sprint {
         return this;
     }
 
-
     /**
-     * Animates the element's color to the new one given. CAN ONLY BE APPLIED TO SHAPES.
+     * Animates the element's color to the specified value. CAN ONLY BE APPLIED TO SHAPES.
      * @param duration Duration of the animation
-     * @param color The color to animate to.
+     * @param color The color to animate to
      */
-    public Sprint fillTo(double duration, Color color) {
+    public Sprint fillColorTo(double duration, Color color) {
 
         KeyValue keyValueX;
 
@@ -225,11 +221,11 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's color from the given rotation to the existing one. CAN ONLY BE APPLIED TO SHAPES.
+     * Animates the element's color from the specified value back to the original. CAN ONLY BE APPLIED TO SHAPES.
      * @param duration Duration of the animation
      * @param color The color to animate from
      */
-    public Sprint fillFrom(double duration, Color color) {
+    public Sprint fillColorFrom(double duration, Color color) {
 
         KeyValue keyValueX;
 
@@ -249,11 +245,11 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's border color to the new one given. CAN ONLY BE APPLIED TO SHAPES.
+     * Animates the element's stroke color to specified value. CAN ONLY BE APPLIED TO SHAPES.
      * @param duration Duration of the animation
-     * @param color The color to animate to.
+     * @param color The color to animate to
      */
-    public Sprint strokeTo(double duration, Color color) {
+    public Sprint strokeColorTo(double duration, Color color) {
 
         KeyValue keyValueX;
 
@@ -271,11 +267,11 @@ public class Sprint {
     }
 
     /**
-     * Animates the element's border color from the given rotation to the existing one. CAN ONLY BE APPLIED TO SHAPES.
+     * Animates the element's border color from the specified value back to the original. CAN ONLY BE APPLIED TO SHAPES.
      * @param duration Duration of the animation
      * @param color The color to animate from
      */
-    public Sprint strokeFrom(double duration, Color color) {
+    public Sprint strokeColorFrom(double duration, Color color) {
 
         KeyValue keyValueX;
 
@@ -330,8 +326,8 @@ public class Sprint {
     }
 
     /**
-     * Loops the animation. Use 0 for count to run the loop indefinitely.
-     * Suggested to change the interpolator to EASE_BOTH for a smooth loop.
+     * Loops the animation. Use the value 0 to run the loop indefinitely.
+     * Looping animations usually work best with the ease both interpolator.
      * @param count The number of times to run the animation. 0 for indefinite.
      */
     public void loop(int count) {
@@ -358,9 +354,9 @@ public class Sprint {
 
     /**
      * Create a pause in the animation timeline, so that elements can animate at different times.
-     * Normally, all animations are occurring at the same time. Use wait() in order to move on to the next animation.
-     * Use a time of 0.0 if you want there to be no gap, but rather just a transition to the next animation.=
-     * @param time
+     * Normally, all animations are occur at the same time. Use wait() in order to move on to the next animation.
+     * Use a time of 0.0 if you want there to be no gap, but rather just a transition to the next animation.
+     * @param time The duration to pause the animation
      */
     public Sprint wait(double time) {
 
@@ -385,9 +381,7 @@ public class Sprint {
      * @param node The new element to animate
      */
     public Sprint setNode(Node node) {
-
         this.node = node;
-
         return this;
     }
 
@@ -410,7 +404,7 @@ public class Sprint {
     // Helper animation functions
 
     /**
-     * Slides an element in from the right side of the screen to its existing position.
+     * Slides an element in from the right side of the screen to its original position.
      * @param duration The duration of the animation
      */
     public Sprint slideFromRight(double duration) {
@@ -422,7 +416,7 @@ public class Sprint {
     }
 
     /**
-     * Slides an element in from the left side of the screen to its existing position.
+     * Slides an element in from the left side of the screen to its original position.
      * @param duration The duration of the animation
      */
     public Sprint slideFromLeft(double duration) {
@@ -435,7 +429,7 @@ public class Sprint {
     }
 
     /**
-     * Slides an element in from the top of the screen to its existing position.
+     * Slides an element in from the top of the screen to its original position.
      * @param duration The duration of the animation
      */
     public Sprint slideFromTop(double duration) {
@@ -448,7 +442,7 @@ public class Sprint {
     }
 
     /**
-     * Slides an element in from the bottom of the screen to its existing position.
+     * Slides an element in from the bottom of the screen to its original position.
      * @param duration The duration of the animation
      */
     public Sprint slideFromBottom(double duration) {

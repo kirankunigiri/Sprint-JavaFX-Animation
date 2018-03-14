@@ -1,5 +1,6 @@
 package com.kirankunigiri.Sprint;
 
+import com.kirankunigiri.Sprint.Interpolators.*;
 import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,15 +40,15 @@ public class Controller {
         System.out.println("Scene is displayed!");
 
         sprint = new Sprint(title);
-        sprint.setInterpolator(SprintInterpolators.ELASTIC);
+        sprint.setInterpolator(new ElasticInterpolator());
         sprint.wait(0.5);
         sprint.slideFromLeft(2);
         sprint.setNode(subtitle).slideFromRight(2).wait(0.5).sprint();
 
         buttonSprint = new Sprint(button);
-        buttonSprint.setInterpolator(SprintInterpolators.EXPONENTIAL);
+        buttonSprint.setInterpolator(new ElasticInterpolator());
         buttonSprint.wait(0.8).slideFromBottom(1.0).sprint();
-        buttonSprint.setInterpolator(SprintInterpolators.BACK);
+        buttonSprint.setInterpolator(new BackInterpolator());
 
         sprint.isAnimating.addListener( (v, oldValue, newValue) -> {
             System.out.println("Animation state is now: " + newValue);
@@ -58,6 +59,7 @@ public class Controller {
             System.out.println("Animation state is now: " + newValue);
             buttonIsAnimating = newValue;
         });
+
     }
 
     public void buttonClicked() {
@@ -69,6 +71,7 @@ public class Controller {
                 sprint.setInterpolator(newInterpolator);
                 sprint.setNode(title).slideFromLeft(1.5);
                 sprint.setNode(subtitle).slideFromRight(1.5).sprint();
+                sprint.setInterpolator(new BackInterpolator(EasingMode.EASE_IN));
             }
         }
     }
@@ -85,16 +88,16 @@ public class Controller {
         int num = interpolatorIndex;
         interpolatorIndex++;
         switch (num) {
-            case 1: return SprintInterpolators.BACK;
-            case 2: return SprintInterpolators.BOUNCE;
-            case 3: return SprintInterpolators.CIRCULAR;
-            case 4: return SprintInterpolators.CUBIC;
-            case 5: return SprintInterpolators.ELASTIC;
-            case 6: return SprintInterpolators.EXPONENTIAL;
-            case 7: return SprintInterpolators.QUADRATIC;
-            case 8: return SprintInterpolators.QUINTIC;
-            case 9: return SprintInterpolators.SINE;
-            default: return SprintInterpolators.BOUNCE;
+            case 1: return new BackInterpolator();
+            case 2: return new BounceInterpolator();
+            case 3: return new CircularInterpolator();
+            case 4: return new CubicInterpolator();
+            case 5: return new ElasticInterpolator();
+            case 6: return new ExponentialInterpolator();
+            case 7: return new QuadraticInterpolator();
+            case 8: return new QuinticInterpolator();
+            case 9: return new SineInterpolator();
+            default: return new BounceInterpolator();
         }
     }
 
