@@ -1,5 +1,5 @@
 <p align="center">
-<img src="Images/Logo.png" alt="Logo" height="150">
+<img src="Images/Banner.png" alt="Logo" height="150">
 </p>
 
 # Sprint ![License MIT](https://img.shields.io/badge/platform-JavaFX-orange.svg)
